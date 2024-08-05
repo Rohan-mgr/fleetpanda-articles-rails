@@ -1,0 +1,16 @@
+ <% unless comment.archived?%>
+     <div class="card border-warning mb-3 mx-3" style="max-width: 100%">
+        <div class="card-header">
+            <p class="m-0"><%= comment.commenter %></p>
+            <p class="m-0"><%= Time.parse(comment.created_at.to_s).strftime('%d %B %A %Y') %></p>
+        </div>
+        <div class="card-body">
+          <p class="card-text"> <%= comment.body %></p>
+          <%= link_to "Delete Comment", article_comment_path(comment.article, comment), data: {
+            turbo_method: :delete, 
+            turbo_confirm: "Are you sure?"
+        }, class: "btn btn-outline-danger float-end" %>
+        </div>
+    </div>
+
+<% end %>

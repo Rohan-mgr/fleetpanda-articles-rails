@@ -1,0 +1,53 @@
+<div class="px-5">
+    <h1 class="text-center mt-2">Article Details</h1>
+    <div class="d-flex justify-content-between">
+        <p><%= link_to "<- View all articles", articles_path, class: "btn btn-info" %></p>
+        <ul class="list-unstyled d-flex gap-3">
+            
+            <li>
+                <%= link_to "Edit", edit_article_path(@article), class: "btn btn-warning" %>
+            </li>
+            <li>
+                <%= link_to "Delete", @article, data: {
+                    turbo_method: :delete, 
+                    turbo_confirm: "Are you sure?"
+                }, class: "btn btn-danger" %>
+            </li>
+    </ul>
+    </div>
+    <h2><%= @article.title %></h2>
+    <p><%= Time.parse(@article.created_at.to_s).strftime('%d %B %A %Y') %></p>
+    <p class="mx-auto fs-5"><%= @article.body %></p>
+    
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Comments: </h2>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            + Add Comment
+        </button>
+    </div>
+    <% if @article.comments.length > 0 %>
+        <%= render @article.comments %>
+    <% else %>
+        <p class="text-danger">No comments posted yet!</p>
+    <% end %>
+
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Comment</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+             <%= render 'comments/form' %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+   
+</div>
