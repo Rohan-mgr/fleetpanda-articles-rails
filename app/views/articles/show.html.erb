@@ -27,7 +27,7 @@
         </button>
     </div>
     <% if @article.comments.length > 0 %>
-        <%= render @article.comments %>
+        <%= render @article.comments.reverse %>
     <% else %>
         <p class="text-danger">No comments posted yet!</p>
     <% end %>
